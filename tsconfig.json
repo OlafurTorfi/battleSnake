@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6"
+    ],
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "outDir": ".dist"
+  },
+
+  "include": ["./src/*.ts"]
+}

@@ -24,4 +24,13 @@ describe('make state test', () => {
     makeState(mockBoard, { x: 9, y: 3 }, { x: 9, y: 4 }, value)
     expect(value.current).to.eq(3)
   })
+  it('should include the next possible moves of the snake', () => {
+    const newState = makeState(mockBoard, { x: 9, y: 3 }, { x: 9, y: 4 }, { current: 0 })
+    if (!newState || !newState.forward || !newState.right || !newState.left) {
+      throw new Error('no state generated, or state incomplete! State was:' + JSON.stringify(newState))
+    }
+    expect(newState.forward.myHead).to.eq({ x: 9, y: 2 })
+    expect(newState.right.myHead).to.eq({ x: 10, y: 3 })
+    expect(newState.left.myHead).to.eq({ x: 8, y: 3 })
+  })
 })

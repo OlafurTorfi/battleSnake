@@ -4,10 +4,7 @@ import { isPartOfSnake } from './isPartOfSnake'
 import { hasFood } from './hasFood'
 
 export function makeState(board: IBoard, move: IPoint, myHead: IPoint, value: { current: number }): IState | undefined {
-  if (!isWithinBoard(move, board)) {
-    return undefined
-  }
-  if (isPartOfSnake(move, board)) {
+  if (!isWithinBoard(move, board) || isPartOfSnake(move, board)) {
     return undefined
   }
   if (hasFood(move, board)) {

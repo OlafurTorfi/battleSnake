@@ -3,11 +3,12 @@
     "lib": [
       "es6"
     ],
+    "types": ["morgan", "node", "express", "mocha", "chai"],
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
-    "outDir": ".dist"
+    "outDir": "es"
   },
 
-  "include": ["./src/*.ts"]
+  "include": ["./ts/*.ts", "ts/snake/types.ts", "ts/snake/isPartOfSnake.ts", "ts/snake/isPartOfSnake.spec.ts", "ts/snake/isWithinBoard.spec.ts", "ts/snake/isEmpty.ts", "ts/snake/hasFood.spec.ts", "ts/snake/hasFood.ts", "ts/snake/findMove.ts", "ts/snake/findMove.spec.ts", "ts/snake/getDirections.ts", "ts/snake/getDirections.spec.ts", "ts/snake/containsPoint.spec.ts", "ts/snake/containsPoint.ts"]
 }

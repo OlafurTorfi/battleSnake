@@ -5,12 +5,10 @@
   "private": true,
   "author": "Sendwithus",
   "repository": "https://github.com/sendwithus/battlesnake-node",
-  "licenses": [
-    {
-      "type": "WTFPL",
-      "url": "http://www.wtfpl.net/txt/copying/"
-    }
-  ],
+  "licenses": [{
+    "type": "WTFPL",
+    "url": "http://www.wtfpl.net/txt/copying/"
+  }],
   "dependencies": {
     "body-parser": "^1.18.3",
     "cross-env": "^5.2.0",
@@ -36,7 +34,7 @@
     "node": ">=8.x"
   },
   "scripts": {
-    "start": "cross-env PORT=5000 nodemon index.js",
+    "start": "cross-env PORT=5000 nodemon lib/index.js",
     "build:commonjs": "rimraf lib && tsc --target es5 --outDir lib --module commonjs --declaration",
     "build:es": "rimraf es && tsc --target es6 --outDir es --module es6",
     "build": "npm run build:commonjs && npm run build:es",

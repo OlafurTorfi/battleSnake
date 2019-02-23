@@ -1,5 +1,6 @@
-import { containsPoint } from './containsPoint';
+import { containsPoint } from './containsPoint'
+import { IPoint, IBoard } from './types'
 
-export function hasFood(p, board) {
-  return containsPoint(board.food, p);
+export function hasFood(p: IPoint, board: IBoard) {
+  return containsPoint(board.food, p)
 }

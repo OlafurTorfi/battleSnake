@@ -14,10 +14,19 @@ export interface IBoard {
   food: IPoint[]
   snakes: ISnake[]
 }
+export interface IMove {
+  to: IPoint
+  from: IPoint
+}
 export interface IState {
-  myHead: IPoint
-  forward?: IState
-  right?: IState
-  left?: IState
   board: IBoard
+  lastMove: IMove
+  mCount: IMutatableCount
+}
+export interface IMutatableCount {
+  current: number
+}
+export interface IBody {
+  board: IBoard
+  you: ISnake
 }

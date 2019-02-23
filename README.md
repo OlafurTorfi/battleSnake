@@ -15,7 +15,7 @@ This client uses [Express4](http://expressjs.com/en/4x/api.html) for easy route 
 Fork and clone this repo:
 
 ```shell
-git clone git@github.com:battlesnakeio/starter-snake-node.git
+git clone git@github.com:OlafurTorfi/battleSnake.git
 cd battlesnake-node
 ```
 
@@ -27,6 +27,14 @@ npm install
 
 Create an `.env` file in the root of the project and add your environment variables (optional).
 
+Compile the typescript code into javascript using the provided build script
+
+- Troubleshoot: build script expects ./node_modules/.bin to be in your PATH so that it can run installed npm binaries like tsc
+
+```shell
+npm run build
+```
+
 Run the server with auto-reloading on file change:
 
 ```shell
@@ -34,6 +42,16 @@ npm start
 ```
 
 Test the client in your browser at <http://localhost:5000>
+
+## Developing the snake
+
+Run unit tests with the test-driven-development script
+
+```shell
+npm run tdd
+```
+
+Play with the code and see if it breaks the tests or if you want to add some functionality, write a test for what you want to achieve and then try to implement it in code :)
 
 ## Deploying to Heroku
 

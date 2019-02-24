@@ -31,9 +31,13 @@ app.post('/start', (request, response) => {
   return response.json(data)
 })
 // Handle POST request to '/move'
+let printBoard = true
 app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
-
+  if (printBoard) {
+    console.log('InitialBoard ', JSON.stringify(request.body.board))
+    printBoard = false
+  }
   // Response data
   const data = {
     move: findMove(request.body), // one of: ['up','down','left','right']

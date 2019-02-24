@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { getDirections } from './getDirections'
-import { mockBoard } from './mockData'
+import { getDirections, getInitialPosition } from './getDirections'
+import { mockBoardFactory } from './mockData'
 describe('getDirections test', () => {
   const tests = [
     {
@@ -36,5 +36,23 @@ describe('getDirections test', () => {
         expect(getDirections(test.move, test.myHead)).to.deep.eq(test.result)
       },
     )
+  })
+})
+describe('get initial direction test', () => {
+  it('should assume it came from outside the board if it starts on the edge', () => {
+    const atEdge = getInitialPosition(mockBoardFactory(), { x: 10, y: 0 })
+    expect(atEdge.to).to.deep.eq({ x: 10, y: 0 })
+    expect(atEdge.from).to.deep.eq({ x: 10, y: -1 })
+  })
+  it('should face food if it can', () => {
+    const nextToFood = getInitialPosition(mockBoardFactory(), { x: 10, y: 3 })
+    expect(nextToFood.to).to.deep.eq({ x: 10, y: 3 })
+    expect(nextToFood.from).to.deep.eq({ x: 11, y: 3 })
+  })
+
+  it('should face away from any snake', () => {
+    const nextToSnake = getInitialPosition(mockBoardFactory(), { x: 13, y: 6 })
+    expect(nextToSnake.to).to.deep.eq({ x: 13, y: 6 })
+    expect(nextToSnake.from).to.deep.eq({ x: 13, y: 7 })
   })
 })

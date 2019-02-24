@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { containsPoint } from './containsPoint'
-import { mockBoard } from './mockData'
+import { mockBoardFactory } from './mockData'
 describe('containsPoint test', () => {
   const tests = [
     { result: false, point: { x: 8, y: 3 } },
@@ -12,7 +12,7 @@ describe('containsPoint test', () => {
   ]
   tests.forEach(test => {
     it('should find if array of points, contains point ' + JSON.stringify(test.point) + ' is ' + test.result, () => {
-      expect(containsPoint(mockBoard.food, test.point)).to.eq(test.result)
+      expect(containsPoint(mockBoardFactory().food, test.point)).to.eq(test.result)
     })
   })
 })

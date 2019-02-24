@@ -25,6 +25,7 @@ export interface IState {
 }
 export interface IMutatableCount {
   current: number
+  decision?: string
 }
 export interface IBody {
   board: IBoard

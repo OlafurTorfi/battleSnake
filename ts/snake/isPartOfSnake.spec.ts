@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { isPartOfSnake } from './isPartOfSnake'
-import { mockBoard } from './mockData'
+import { mockBoardFactory } from './mockData'
 describe('isPartOfSnake test', () => {
   const tests = [
     { result: true, point: { x: 8, y: 3 } },
@@ -14,8 +14,11 @@ describe('isPartOfSnake test', () => {
     { result: false, point: { x: 6, y: 7 } },
   ]
   tests.forEach(test => {
-    it('should find if point is part of snake' + JSON.stringify(test.point) + ' is ' + test.result, () => {
-      expect(isPartOfSnake(test.point, mockBoard)).to.eq(test.result)
-    })
+    it(
+      'should find if point is part of snake' + JSON.stringify(test.point) + ' when it should be ' + test.result,
+      () => {
+        expect(isPartOfSnake(test.point, mockBoardFactory())).to.eq(test.result)
+      },
+    )
   })
 })

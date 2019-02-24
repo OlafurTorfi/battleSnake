@@ -1,6 +1,6 @@
-# starter-snake-node(js)
+# Waz the greedy top down tree search snake(ts)
 
-A simple [Battlesnake AI](https://battlesnake.io) written in Javascript for NodeJS.
+A simple [Battlesnake AI](https://battlesnake.io) written in Typescript for NodeJS.
 
 To get started you'll need a working NodeJS development environment, and at least read the Heroku docs on [deploying a NodeJS app](https://devcenter.heroku.com/articles/getting-started-with-nodejs).
 

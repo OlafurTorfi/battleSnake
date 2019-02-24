@@ -1,13 +1,21 @@
-import { IBoard, IPoint, IMove } from './types'
+import { IBoard, IMove } from './types'
 import { containsPoint } from './containsPoint'
+import { stringify } from 'querystring'
 
 export function moveSnake(board: IBoard, move: IMove) {
-  board.snakes = board.snakes.map(snake => {
+  const newSnakePositions = board.snakes.map(snake => {
     if (containsPoint(snake.body, move.from)) {
-      snake.body.pop()
-      snake.body.unshift(move.to)
+      const newSnakeBody = snake.body.slice(0, snake.body.length - 1)
+      const newSnake = { id: snake.id, name: snake.name, health: snake.health, body: [move.to, ...newSnakeBody] }
+      return newSnake
     }
     return snake
   })
-  return board
+  const newBoard = {
+    food: board.food.filter(f => f.x !== move.to.x || f.y !== move.to.y),
+    height: board.height,
+    width: board.width,
+    snakes: newSnakePositions,
+  }
+  return newBoard
 }

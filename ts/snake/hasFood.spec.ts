@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { hasFood } from './hasFood'
-import { mockBoard } from './mockData'
+import { mockBoardFactory } from './mockData'
 describe('hasFood test', () => {
   const tests = [
     { result: false, point: { x: 8, y: 3 } },
@@ -12,7 +12,7 @@ describe('hasFood test', () => {
   ]
   tests.forEach(test => {
     it('should find if board contains food at point ' + JSON.stringify(test.point) + ' is ' + test.result, () => {
-      expect(hasFood(test.point, mockBoard)).to.eq(test.result)
+      expect(hasFood(test.point, mockBoardFactory())).to.eq(test.result)
     })
   })
 })

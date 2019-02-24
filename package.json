@@ -5,10 +5,12 @@
   "private": true,
   "author": "Sendwithus",
   "repository": "https://github.com/sendwithus/battlesnake-node",
-  "licenses": [{
-    "type": "WTFPL",
-    "url": "http://www.wtfpl.net/txt/copying/"
-  }],
+  "licenses": [
+    {
+      "type": "WTFPL",
+      "url": "http://www.wtfpl.net/txt/copying/"
+    }
+  ],
   "dependencies": {
     "body-parser": "^1.18.3",
     "cross-env": "^5.2.0",
@@ -22,6 +24,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^11.9.5",
     "chai": "^4.2.0",
+    "husky": "^1.3.1",
     "mocha": "^6.0.1",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4",

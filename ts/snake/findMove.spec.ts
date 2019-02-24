@@ -27,4 +27,17 @@ describe('findMove test', () => {
     const you = mockSnakeFactory('bodyInOnePointAtEdge')
     expect(findMove({ board, you }, 3, false)).to.eq('left')
   })
+  // it.only('should prefer a route with apples', () => {
+  //   const board = mockBoardFactory('smallBoard')
+  //   const you = mockSnakeFactory('farAwayFromFoodOnSmallBoard')
+  //   expect(findMove({ board, you }, 3)).to.eq('right')
+  //   you.body = [{ x: 2, y: 1 }, ...you.body]
+  //   board.snakes[0].body = [{ x: 2, y: 1 }, board.snakes[0].body[0]]
+  //   expect(findMove({ board, you }, 3)).to.eq('down')
+  //   expect(findMove({ board, you }, 3)).to.eq('left')
+  //   expect(findMove({ board, you }, 3)).to.eq('up')
+  //   expect(findMove({ board, you }, 3)).to.eq('right')
+  //   expect(findMove({ board, you }, 3)).to.eq('down')
+  //   expect(findMove({ board, you }, 3)).to.eq('left')
+  // })
 })

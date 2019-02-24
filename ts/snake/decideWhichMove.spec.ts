@@ -53,6 +53,15 @@ describe('decide which move function', () => {
     const left = { board, mCount: { current: 0 }, lastMove: mLeft }
     expect(decideWhichMove(forward, left, right)).to.eq('CannotFindApple')
   })
+  // it.only('should use random number if all other are equal', () => {
+  //   const forward = { board, mCount: { current: 1 }, lastMove: mForward }
+  //   const right = { board, mCount: { current: 1 }, lastMove: mRight }
+  //   const left = { board, mCount: { current: 1 }, lastMove: mLeft }
+  //   const forwardRandom = 0.5
+  //   const rightRandom = 0.5
+  //   const leftRandom = 1
+  //   expect(decideWhichMove(forward, left, right, forwardRandom, leftRandom, rightRandom)).to.eq('down')
+  // })
 })
 describe('has no apples test', () => {
   it('should return true when state is undefined', () => {

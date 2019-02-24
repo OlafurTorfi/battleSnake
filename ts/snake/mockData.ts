@@ -45,6 +45,19 @@ export function mockBoardFactory(boardName: string = 'default'): IBoard {
         },
       ],
     },
+    smallBoard: {
+      height: 11,
+      width: 11,
+      food: [{ x: 10, y: 1 }, { x: 10, y: 5 }],
+      snakes: [
+        {
+          id: '7c05ee54-f038-4bf7-b021-a78728d75402',
+          name: 'w',
+          health: 100,
+          body: [{ x: 1, y: 1 }, { x: 1, y: 1 }, { x: 1, y: 1 }],
+        },
+      ],
+    },
   }
   const selected = boardCollection[boardName]
   if (!selected) {
@@ -65,6 +78,12 @@ export function mockSnakeFactory(name: string = 'default') {
       name: 'Waz',
       health: 100,
       body: [{ x: 10, y: 0 }, { x: 10, y: 0 }, { x: 10, y: 0 }],
+    },
+    farAwayFromFoodOnSmallBoard: {
+      id: '7c05ee54-f038-4bf7-b021-a78728d75402',
+      name: 'Waz',
+      health: 100,
+      body: [{ x: 1, y: 1 }, { x: 1, y: 1 }, { x: 1, y: 1 }],
     },
   }
   return snakeCollection[name]

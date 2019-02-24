@@ -23,7 +23,7 @@ function evaluateLevelLoop(
   return
 }
 
-export function findMove(body: IBody, levelsToEvaluate: number = 9, hasRandom: boolean = true): string {
+export function findMove(body: IBody, levelsToEvaluate: number = 6, hasRandom: boolean = true): string {
   const board: IBoard = body.board
   const head: IPoint = body.you.body[0]
   const hasWeirdBody = !body.you.body[1] || (head.x === body.you.body[1].x && head.y === body.you.body[1].y)
@@ -33,14 +33,14 @@ export function findMove(body: IBody, levelsToEvaluate: number = 9, hasRandom: b
   const moveForward: IMove = { to: directions.forward, from: head }
   const moveLeft: IMove = { to: directions.left, from: head }
   const moveRight: IMove = { to: directions.right, from: head }
-  console.log(
-    'Debug moveForward: ',
-    JSON.stringify(moveForward),
-    ', moveLeft:',
-    JSON.stringify(moveLeft),
-    ', moveRight: ',
-    JSON.stringify(moveRight),
-  )
+  // console.log(
+  //   'Debug moveForward: ',
+  //   JSON.stringify(moveForward),
+  //   ', moveLeft:',
+  //   JSON.stringify(moveLeft),
+  //   ', moveRight: ',
+  //   JSON.stringify(moveRight),
+  // )
   const preStateForward: IState = { board, lastMove, mCount: { current: 0, decision: 'forward' } }
   const preStateLeft: IState = { board, lastMove, mCount: { current: 0, decision: 'left' } }
   const preStateRight: IState = { board, lastMove, mCount: { current: 0, decision: 'right' } }
@@ -75,7 +75,7 @@ export function findMove(body: IBody, levelsToEvaluate: number = 9, hasRandom: b
     randomRightMultiplyer,
   )
   if (nextMove === 'CannotFindApple') {
-    console.log('Found no apple so evaluating move again with empty squares valued')
+    // console.log('Found no apple so evaluating move again with empty squares valued')
     stateForward = evaluateMove(preStateForward, moveForward, foodValue, true)
     stateLeft = evaluateMove(preStateLeft, moveLeft, foodValue, true)
     stateRight = evaluateMove(preStateRight, moveRight, foodValue, true)
@@ -91,7 +91,14 @@ export function findMove(body: IBody, levelsToEvaluate: number = 9, hasRandom: b
       firstLevel.push(stateRight)
     }
     evaluateLevelLoop(firstLevel, 1, levelsToEvaluate, true)
-    return decideWhichMove(stateForward, stateLeft, stateRight)
+    return decideWhichMove(
+      stateForward,
+      stateLeft,
+      stateRight,
+      randomForwardMultiplyer,
+      randomLeftMultiplyer,
+      randomRightMultiplyer,
+    )
   }
   return nextMove
 }

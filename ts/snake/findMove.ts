@@ -4,17 +4,26 @@ import { evaluateLevel } from './evaluateLevel'
 import { decideWhichMove } from './decideWhichMove'
 import { evaluateMove } from './evaluateMove'
 
-const greed = 10
-function evaluateLevelLoop(level: IState[], numberOfIterations: number, levelsToEvaluate: number) {
+const greed = 1
+function evaluateLevelLoop(
+  level: IState[],
+  numberOfIterations: number,
+  levelsToEvaluate: number,
+  valueEmptySquare: boolean = false,
+) {
   if (numberOfIterations < levelsToEvaluate) {
     const proximityBias = (levelsToEvaluate - numberOfIterations) * (levelsToEvaluate - numberOfIterations)
     const foodValue = greed + proximityBias
-    return evaluateLevelLoop(evaluateLevel(level, foodValue), numberOfIterations + 1, levelsToEvaluate)
+    return evaluateLevelLoop(
+      evaluateLevel(level, foodValue, valueEmptySquare),
+      numberOfIterations + 1,
+      levelsToEvaluate,
+    )
   }
   return
 }
 
-export function findMove(body: IBody, levelsToEvaluate: number = 8, hasRandom: boolean = true): string {
+export function findMove(body: IBody, levelsToEvaluate: number = 9, hasRandom: boolean = true): string {
   const board: IBoard = body.board
   const head: IPoint = body.you.body[0]
   const hasWeirdBody = !body.you.body[1] || (head.x === body.you.body[1].x && head.y === body.you.body[1].y)
@@ -24,10 +33,18 @@ export function findMove(body: IBody, levelsToEvaluate: number = 8, hasRandom: b
   const moveForward: IMove = { to: directions.forward, from: head }
   const moveLeft: IMove = { to: directions.left, from: head }
   const moveRight: IMove = { to: directions.right, from: head }
+  console.log(
+    'Debug moveForward: ',
+    JSON.stringify(moveForward),
+    ', moveLeft:',
+    JSON.stringify(moveLeft),
+    ', moveRight: ',
+    JSON.stringify(moveRight),
+  )
   const preStateForward: IState = { board, lastMove, mCount: { current: 0, decision: 'forward' } }
   const preStateLeft: IState = { board, lastMove, mCount: { current: 0, decision: 'left' } }
   const preStateRight: IState = { board, lastMove, mCount: { current: 0, decision: 'right' } }
-  const proximityBias = Math.pow(levelsToEvaluate, 4)
+  const proximityBias = Math.pow(levelsToEvaluate, 3)
   const foodValue = greed + proximityBias
   let stateForward = evaluateMove(preStateForward, moveForward, foodValue)
   let stateLeft = evaluateMove(preStateLeft, moveLeft, foodValue)
@@ -45,7 +62,7 @@ export function findMove(body: IBody, levelsToEvaluate: number = 8, hasRandom: b
   }
   evaluateLevelLoop(firstLevel, 1, levelsToEvaluate)
   // add some randomness to break out of cycles'
-  const wormRandomnessPercentage = 30
+  const wormRandomnessPercentage = 40
   const randomForwardMultiplyer = 1 - Math.random() / wormRandomnessPercentage
   const randomLeftMultiplyer = 1 - Math.random() / wormRandomnessPercentage
   const randomRightMultiplyer = 1 - Math.random() / wormRandomnessPercentage
@@ -58,9 +75,10 @@ export function findMove(body: IBody, levelsToEvaluate: number = 8, hasRandom: b
     randomRightMultiplyer,
   )
   if (nextMove === 'CannotFindApple') {
-    stateForward = evaluateMove(preStateForward, moveForward, foodValue)
-    stateLeft = evaluateMove(preStateLeft, moveLeft, foodValue)
-    stateRight = evaluateMove(preStateRight, moveRight, foodValue)
+    console.log('Found no apple so evaluating move again with empty squares valued')
+    stateForward = evaluateMove(preStateForward, moveForward, foodValue, true)
+    stateLeft = evaluateMove(preStateLeft, moveLeft, foodValue, true)
+    stateRight = evaluateMove(preStateRight, moveRight, foodValue, true)
 
     firstLevel = []
     if (stateForward) {
@@ -72,7 +90,7 @@ export function findMove(body: IBody, levelsToEvaluate: number = 8, hasRandom: b
     if (stateRight) {
       firstLevel.push(stateRight)
     }
-    evaluateLevelLoop(firstLevel, 1, levelsToEvaluate)
+    evaluateLevelLoop(firstLevel, 1, levelsToEvaluate, true)
     return decideWhichMove(stateForward, stateLeft, stateRight)
   }
   return nextMove
